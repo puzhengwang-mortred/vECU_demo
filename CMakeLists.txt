@@ -5,8 +5,20 @@ project(vECU_Demo)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Find SilKit package
-find_package(SilKit REQUIRED)
+# Find SilKit package or use local source
+find_package(SilKit QUIET)
+if(NOT SilKit_FOUND)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/sil-kit/CMakeLists.txt")
+        message(STATUS "SilKit not found on system, using local source in sil-kit folder")
+        # Disable SilKit tests/demos to speed up build
+        set(SILKIT_BUILD_TESTS OFF CACHE BOOL "Build SIL Kit tests" FORCE)
+        set(SILKIT_BUILD_DEMOS OFF CACHE BOOL "Build SIL Kit demos" FORCE)
+        set(SILKIT_BUILD_UTILITIES OFF CACHE BOOL "Build SIL Kit utilities" FORCE)
+        add_subdirectory(sil-kit)
+    else()
+        find_package(SilKit REQUIRED)
+    endif()
+endif()
 
 # Add SpeedController executable
 add_executable(SpeedControllerECU
