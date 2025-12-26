@@ -1,0 +1,58 @@
+{
+  "ParticipantName": "SpeedControllerECU",
+  "RegistryUri": "silkit://localhost:8500",
+  "Logging": {
+    "Sinks": [
+      {
+        "Type": "File",
+        "FileName": "SpeedControllerECU.log",
+        "Level": "Info"
+      },
+      {
+        "Type": "Console",
+        "Level": "Info"
+      }
+    ]
+  },
+  "Networks": {
+    "ETH": {
+      "Type": "Ethernet",
+      "Interfaces": [
+        {
+          "Name": "VirtualEthernet",
+          "Protocol": "Tcp",
+          "IpAddress": "127.0.0.1",
+          "Port": 8501
+        }
+      ]
+    }
+  },
+  "PubSub": {
+    "Topics": [
+      {
+        "Name": "VehicleSpeed",
+        "Type": "VehicleSpeedType",
+        "Network": "ETH",
+        "Middleware": {
+          "Protocol": "Tcp",
+          "Qos": {
+            "Priority": 1,
+            "Deadline": "10ms"
+          }
+        }
+      },
+      {
+        "Name": "ControlCommands",
+        "Type": "ControlCommandsType",
+        "Network": "ETH",
+        "Middleware": {
+          "Protocol": "Tcp",
+          "Qos": {
+            "Priority": 1,
+            "Deadline": "10ms"
+          }
+        }
+      }
+    ]
+  }
+}

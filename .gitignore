@@ -1,0 +1,88 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+
+# Visual Studio files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code files
+.vscode/
+*.code-workspace
+
+# Visual Studio IntelliSense
+ipch/
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code extensions
+.vs/
+
+# Executables and binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+
+# Output directories
+bin/
+lib/
+obj/
+Debug/
+Release/
+x64/
+Win32/
+
+# Log files
+*.log
+*.out
+
+# SilKit runtime files
+*.silkit.yaml
+*.silkit.log
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# IDE related
+.idea/
+*.swp
+*.swo
+
+# Generated files that might be created during compilation
+SpeedController_ert_rtw/ert_main.c
+SpeedController_ert_rtw/*.obj
+SpeedController_ert_rtw/*.ilk
+SpeedController_ert_rtw/*.pdb
+SpeedController_ert_rtw/*.exp
+SpeedController_ert_rtw/*.lib
+
+VehicleSpeedModel_grt_rtw/*.obj
+VehicleSpeedModel_grt_rtw/*.ilk
+VehicleSpeedModel_grt_rtw/*.pdb
+VehicleSpeedModel_grt_rtw/*.exp
+VehicleSpeedModel_grt_rtw/*.lib
+
+# Simulation data files
+*.mat
+*.csv
+*.dat
