@@ -99,21 +99,6 @@ public:
         _canController->SendFrame(frame);
     }
     
-    // Method to send initial control commands to start the simulation
-    void sendInitialControlCommands() {
-        ControlCommandData controlData;
-        controlData.throttle = 0.5;  // Start with 50% throttle
-        controlData.brake = 0.0;
-        
-        SilKit::Services::Can::CanFrame frame;
-        frame.canId = 0x200;  // Control command message ID
-        frame.dlc = sizeof(ControlCommandData);
-        frame.dataField.resize(sizeof(ControlCommandData));
-        std::memcpy(frame.dataField.data(), &controlData, sizeof(ControlCommandData));
-        
-        _canController->SendFrame(frame);
-    }
-    
     // Method to get current speed output from the model
     double getCurrentSpeed() {
         return VehicleSpeedModel_Y.Speed_Output;
@@ -145,8 +130,8 @@ int main(int argc, char* argv[]) {
         // Set up lifecycle handlers
         lifecycleService->SetCommunicationReadyHandler([&vehicleSpeedModelASW]() {
             std::cout << "VehicleSpeedModel: Communication ready" << std::endl;
-            // Send initial control commands to start the simulation
-            vehicleSpeedModelASW.sendInitialControlCommands();
+            // Send initial speed to start the closed loop
+            vehicleSpeedModelASW.sendVehicleSpeed(0.0);
         });
         
         lifecycleService->SetStopHandler([]() {

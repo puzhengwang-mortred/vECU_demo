@@ -104,20 +104,6 @@ public:
         // Send the frame via CAN
         _canController->SendFrame(frame);
     }
-    
-    // Method to send vehicle speed data to other participants
-    void sendVehicleSpeed(double speed) {
-        VehicleSpeedData speedData;
-        speedData.speed = speed;
-        
-        SilKit::Services::Can::CanFrame frame;
-        frame.canId = 0x100;  // Vehicle speed message ID
-        frame.dlc = sizeof(VehicleSpeedData);
-        frame.dataField.resize(sizeof(VehicleSpeedData));
-        std::memcpy(frame.dataField.data(), &speedData, sizeof(VehicleSpeedData));
-        
-        _canController->SendFrame(frame);
-    }
 };
 
 int main(int argc, char* argv[]) {
@@ -143,10 +129,8 @@ int main(int argc, char* argv[]) {
         auto* lifecycleService = participant->CreateLifecycleService({SilKit::Services::Orchestration::OperationMode::Coordinated});
         
         // Set up lifecycle handlers
-        lifecycleService->SetCommunicationReadyHandler([&speedControllerASW]() {
+        lifecycleService->SetCommunicationReadyHandler([]() {
             std::cout << "SpeedController: Communication ready" << std::endl;
-            // Send an initial message to announce presence
-            speedControllerASW.sendVehicleSpeed(0.0);
         });
         
         lifecycleService->SetStopHandler([]() {

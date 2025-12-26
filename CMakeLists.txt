@@ -11,9 +11,6 @@ find_package(SilKit REQUIRED)
 # Add SpeedController executable
 add_executable(SpeedControllerECU
     SpeedController_ert_rtw/SpeedController.c
-    SpeedController_ert_rtw/rtwtypes.c
-    SpeedController_ert_rtw/rt_nonfinite.c
-    SpeedController_ert_rtw/SpeedController_private.c
     SpeedController_ert_rtw/vECU_Main.cpp
 )
 
@@ -21,9 +18,7 @@ add_executable(SpeedControllerECU
 add_executable(VehicleSpeedModelECU
     VehicleSpeedModel_grt_rtw/VehicleSpeedModel.c
     VehicleSpeedModel_grt_rtw/VehicleSpeedModel_data.c
-    VehicleSpeedModel_grt_rtw/rtwtypes.c
     VehicleSpeedModel_grt_rtw/rt_nonfinite.c
-    VehicleSpeedModel_grt_rtw/VehicleSpeedModel_private.c
     VehicleSpeedModel_grt_rtw/vECU_PlantModel.cpp
 )
 
